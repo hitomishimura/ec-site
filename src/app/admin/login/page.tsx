@@ -47,7 +47,7 @@ export default function AdminLogin() {
           size="large"
           fullWidth
           sx={{
-            mt: 10,
+            mt: 12,
             backgroundColor: "black",
             "&:hover": {
               backgroundColor: "#222",
