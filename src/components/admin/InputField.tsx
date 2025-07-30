@@ -5,18 +5,24 @@ import { TextField, Box, Typography } from "@mui/material";
 
 type Props = {
   label: string;
+  type?: React.HTMLInputTypeAttribute;
   placeholder: string;
   mt?: string | number;
 };
 
-const InputField: React.FC<Props> = ({ label, placeholder, mt = 0 }) => {
+export const InputField = ({
+  label,
+  type = "text",
+  placeholder,
+  mt = 0,
+}: Props) => {
   return (
     <Box sx={{ mt }}>
       <Typography variant="subtitle2" sx={{ fontWeight: "bold" }}>
         {label}
       </Typography>
       <TextField
-        type="password"
+        type={type}
         variant="outlined"
         margin="dense"
         placeholder={placeholder}
@@ -25,5 +31,3 @@ const InputField: React.FC<Props> = ({ label, placeholder, mt = 0 }) => {
     </Box>
   );
 };
-
-export default InputField;

@@ -1,7 +1,7 @@
 "use client";
 
 import { Button, Box, Typography } from "@mui/material";
-import InputField from "@/components/admin/InputField";
+import { InputField } from "@/components/admin/InputField";
 
 export default function AdminLogin() {
   return (
@@ -20,8 +20,17 @@ export default function AdminLogin() {
         管理者ログイン
       </Typography>
       <Box sx={{ mt: "56px" }}>
-        <InputField label="メールアドレス" placeholder="email@example.net" />
-        <InputField label="パスワード" placeholder="Password" mt="24px" />
+        <InputField
+          label="メールアドレス"
+          type="email"
+          placeholder="email@example.net"
+        />
+        <InputField
+          label="パスワード"
+          type="password"
+          placeholder="Password"
+          mt="24px"
+        />
         <Button
           variant="contained"
           size="large"
