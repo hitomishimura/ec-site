@@ -10,12 +10,12 @@ type Props = {
   mt?: string | number;
 };
 
-export const InputField = ({
+export default function InputField({
   label,
   type = "text",
   placeholder,
   mt = 0,
-}: Props) => {
+}: Props) {
   return (
     <Box sx={{ mt }}>
       <Typography variant="subtitle2" sx={{ fontWeight: "bold" }}>
@@ -30,4 +30,4 @@ export const InputField = ({
       />
     </Box>
   );
-};
+}
