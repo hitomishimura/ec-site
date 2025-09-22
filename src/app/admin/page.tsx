@@ -6,53 +6,16 @@ import InputField from "@/components/admin/InputField";
 import Header from "@/components/admin/Header";
 import Sidebar from "@/components/admin/Sidebar";
 import { Box, Typography, Paper, Button, Divider } from "@mui/material";
+import { products } from "@/mocks/products";
 
 export default function AdminTopPage() {
-  const products = [
-    {
-      id: 1,
-      image: "/images/Image.png",
-      name: "商品名A",
-      price: 1000,
-      description:
-        "サンプル商品Aの説明テキストテキストテキストテキストテキスト",
-    },
-    {
-      id: 2,
-      image: "/images/Image.png",
-      name: "商品名B",
-      price: 800,
-      description:
-        "サンプル商品Aの説明テキストテキストテキストテキストテキスト",
-    },
-    {
-      id: 3,
-      image: "/images/Image.png",
-      name: "商品名C",
-      price: 3000,
-      description:
-        "サンプル商品Aの説明テキストテキストテキストテキストテキスト",
-    },
-    {
-      id: 4,
-      image: "/images/Image.png",
-      name: "商品名D",
-      price: 16000,
-      description:
-        "サンプル商品Aの説明テキストテキストテキストテキストテキスト",
-    },
-    {
-      id: 5,
-      image: "/images/Image.png",
-      name: "商品名E",
-      price: 700,
-      description:
-        "サンプル商品Aの説明テキストテキストテキストテキストテキスト",
-    },
-  ];
   const [productName, setProductName] = useState("");
   const [price, setPrice] = useState("");
   const [description, setDescription] = useState("");
+
+  const handleSearch = () => {
+    console.log("click search");
+  };
 
   const handleClear = () => {
     setProductName("");
@@ -60,10 +23,14 @@ export default function AdminTopPage() {
     setDescription("");
   };
 
+  const handleRegister = () => {
+    console.log("click register");
+  };
+
   return (
     <Box sx={{ display: "flex", flexDirection: "column", height: "100vh" }}>
       <Header />
-      <Box sx={{ display: "flex", flex: 1 }}>
+      <Box sx={{ display: "flex", flex: "column", overflow: "auto" }}>
         <Sidebar />
 
         {/* トップページ */}
@@ -145,6 +112,7 @@ export default function AdminTopPage() {
                     boxShadow: "none",
                     "&:hover": { boxShadow: "none" },
                   }}
+                  onClick={handleSearch}
                 >
                   検索
                 </Button>
@@ -169,6 +137,7 @@ export default function AdminTopPage() {
                 display: "flex",
                 marginLeft: "auto",
               }}
+              onClick={handleRegister}
             >
               + 新規登録
             </Button>
