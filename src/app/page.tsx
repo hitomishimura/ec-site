@@ -12,6 +12,11 @@ export default function Page() {
       <Link href="/admin/login" passHref>
         管理者ログイン
       </Link>
+      <br />
+      <Link href="/admin" passHref>
+        トップページ
+      </Link>
+      <br />
     </div>
   );
 }
