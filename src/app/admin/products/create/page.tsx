@@ -12,6 +12,9 @@ import {
   TextField,
   Button,
   IconButton,
+  Dialog,
+  DialogContent,
+  DialogActions,
 } from "@mui/material";
 import AttachFileIcon from "@mui/icons-material/AttachFile";
 import CloseIcon from "@mui/icons-material/Close";
@@ -28,6 +31,7 @@ export default function AdminProductsCreate() {
   const [selectedFile, setSelectedFile] = useState<File | null>(null);
   const [previewUrl, setPreviewUrl] = useState<string | null>(null);
   const [error, setError] = useState<string>("");
+  const [open, setOpen] = useState(false); // 確認ダイアログ
 
   const handleFileSelect = (event: React.ChangeEvent<HTMLInputElement>) => {
     const file = event.target.files?.[0];
@@ -66,6 +70,7 @@ export default function AdminProductsCreate() {
 
   const handleRegister = () => {
     console.log("click register");
+    setOpen(false);
   };
   const handleClear = () => {
     setProductName("");
@@ -73,6 +78,9 @@ export default function AdminProductsCreate() {
     setDescription("");
     handleSelectFileClear();
   };
+
+  const openDialog = () => setOpen(true);
+  const closeDialog = () => setOpen(false);
 
   return (
     <Box sx={{ display: "flex", flexDirection: "column", height: "100vh" }}>
@@ -315,10 +323,57 @@ export default function AdminProductsCreate() {
                 boxShadow: "none",
                 "&:hover": { boxShadow: "none" },
               }}
-              onClick={handleRegister}
+              onClick={openDialog}
             >
               新規登録
             </Button>
+
+            <Dialog
+              open={open}
+              onClose={closeDialog}
+              slotProps={{
+                paper: {
+                  sx: {
+                    width: "400px",
+                    p: 2,
+                    m: 1,
+                  },
+                },
+              }}
+            >
+              <DialogContent>
+                <Typography>入力された内容で新規登録をしますか？</Typography>
+              </DialogContent>
+              <DialogActions>
+                <Button
+                  variant="outlined"
+                  color="primary"
+                  sx={{
+                    mr: 1,
+                    whiteSpace: "nowrap",
+                    backgroundColor: "white",
+                    "&:hover": {
+                      backgroundColor: "#f5f5f5",
+                    },
+                  }}
+                  onClick={closeDialog}
+                >
+                  キャンセル
+                </Button>
+                <Button
+                  variant="contained"
+                  color="primary"
+                  sx={{
+                    whiteSpace: "nowrap",
+                    boxShadow: "none",
+                    "&:hover": { boxShadow: "none" },
+                  }}
+                  onClick={handleRegister}
+                >
+                  新規登録
+                </Button>
+              </DialogActions>
+            </Dialog>
           </Box>
         </Box>
       </Box>
