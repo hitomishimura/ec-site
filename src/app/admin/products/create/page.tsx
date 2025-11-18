@@ -4,6 +4,7 @@ import React, { useState } from "react";
 import Header from "@/components/admin/Header";
 import Sidebar from "@/components/admin/Sidebar";
 import Breadcrumb from "@/components/admin/Breadcrumb";
+import CustomDialog from "@/components/admin/CustomDialog";
 import {
   Typography,
   Box,
@@ -328,52 +329,11 @@ export default function AdminProductsCreate() {
               新規登録
             </Button>
 
-            <Dialog
-              open={open}
+            <CustomDialog
+              isOpen={open}
               onClose={closeDialog}
-              slotProps={{
-                paper: {
-                  sx: {
-                    width: "400px",
-                    p: 2,
-                    m: 1,
-                  },
-                },
-              }}
-            >
-              <DialogContent>
-                <Typography>入力された内容で新規登録をしますか？</Typography>
-              </DialogContent>
-              <DialogActions>
-                <Button
-                  variant="outlined"
-                  color="primary"
-                  sx={{
-                    mr: 1,
-                    whiteSpace: "nowrap",
-                    backgroundColor: "white",
-                    "&:hover": {
-                      backgroundColor: "#f5f5f5",
-                    },
-                  }}
-                  onClick={closeDialog}
-                >
-                  キャンセル
-                </Button>
-                <Button
-                  variant="contained"
-                  color="primary"
-                  sx={{
-                    whiteSpace: "nowrap",
-                    boxShadow: "none",
-                    "&:hover": { boxShadow: "none" },
-                  }}
-                  onClick={handleRegister}
-                >
-                  新規登録
-                </Button>
-              </DialogActions>
-            </Dialog>
+              onClick={handleRegister}
+            />
           </Box>
         </Box>
       </Box>
