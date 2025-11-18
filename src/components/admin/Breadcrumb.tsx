@@ -22,7 +22,7 @@ export default function Breadcrumb({ items }: Props) {
         mb: 2,
       }}
     >
-      <Breadcrumbs aria-label="breadcrumb">
+      <Breadcrumbs separator=">" aria-label="breadcrumb">
         {items.map((item, index) =>
           item.href && index !== items.length - 1 ? (
             <Link
