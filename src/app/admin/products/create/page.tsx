@@ -13,9 +13,6 @@ import {
   TextField,
   Button,
   IconButton,
-  Dialog,
-  DialogContent,
-  DialogActions,
 } from "@mui/material";
 import AttachFileIcon from "@mui/icons-material/AttachFile";
 import CloseIcon from "@mui/icons-material/Close";
@@ -118,7 +115,7 @@ export default function AdminProductsCreate() {
               borderRadius: 0,
             }}
           >
-            <Typography>基本情報</Typography>
+            <Typography>基本情報（新規登録）</Typography>
           </Paper>
 
           <Box
@@ -328,13 +325,12 @@ export default function AdminProductsCreate() {
             >
               新規登録
             </Button>
-
-            <CustomDialog
-              isOpen={open}
-              onClose={closeDialog}
-              onClick={handleRegister}
-            />
           </Box>
+          <CustomDialog
+            isOpen={open}
+            onClose={closeDialog}
+            onClick={handleRegister}
+          />
         </Box>
       </Box>
     </Box>
