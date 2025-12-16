@@ -187,7 +187,7 @@ export default function AdminProductsDetail({
               </Grid>
               <Grid size={{ xs: 10 }} sx={{ borderLeft: "1px solid #D9D9D9" }}>
                 <Box sx={{ p: 2, display: "flex", alignItems: "center" }}>
-                  <Typography>{product?.price}</Typography>
+                  <Typography>{product?.price.toLocaleString()}</Typography>
                   <Typography>円</Typography>
                 </Box>
               </Grid>
