@@ -25,9 +25,9 @@ const headerHeight = 64;
 const menuList: MenuItem[] = [
   {
     name: "管理者トップページ",
-    url: "###",
+    url: "/admin/",
     icon: <HomeIcon />,
-    children: [{ name: "商品新規登録", url: "###" }],
+    children: [{ name: "商品新規登録", url: "/admin/products/create" }],
   },
 ];
 

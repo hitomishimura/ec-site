@@ -5,7 +5,7 @@ import Header from "@/components/admin/Header";
 import Sidebar from "@/components/admin/Sidebar";
 import Breadcrumb from "@/components/admin/Breadcrumb";
 import CustomDialog from "@/components/admin/CustomDialog";
-import { Typography, Box, Paper, Grid, Button } from "@mui/material";
+import { Typography, Box, Paper, Grid, Button, Link } from "@mui/material";
 import Image from "next/image";
 import { products, type Product } from "@/mocks/products";
 
@@ -77,21 +77,23 @@ export default function AdminProductsDetail({
             >
               <Typography>基本情報</Typography>
               <Box sx={{ display: "flex", marginLeft: "auto" }}>
-                <Button
-                  variant="outlined"
-                  color="primary"
-                  sx={{
-                    mr: 2,
-                    whiteSpace: "nowrap",
-                    backgroundColor: "white",
-                    "&:hover": {
-                      backgroundColor: "#f5f5f5",
-                    },
-                  }}
-                  onClick={handleEdit}
-                >
-                  編集
-                </Button>
+                <Link href={`/admin/products/${productId}/edit`}>
+                  <Button
+                    variant="outlined"
+                    color="primary"
+                    sx={{
+                      mr: 2,
+                      whiteSpace: "nowrap",
+                      backgroundColor: "white",
+                      "&:hover": {
+                        backgroundColor: "#f5f5f5",
+                      },
+                    }}
+                    onClick={handleEdit}
+                  >
+                    編集
+                  </Button>
+                </Link>
                 <Button
                   variant="outlined"
                   color="error"
