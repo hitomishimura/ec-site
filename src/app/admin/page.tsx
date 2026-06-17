@@ -5,6 +5,7 @@ import Image from "next/image";
 import InputField from "@/components/admin/InputField";
 import Header from "@/components/admin/Header";
 import Sidebar from "@/components/admin/Sidebar";
+import PrimaryButton from "@/components/admin/PrimaryButton";
 import { Box, Typography, Paper, Button, Divider } from "@mui/material";
 import { products } from "@/mocks/products";
 
@@ -104,18 +105,7 @@ export default function AdminTopPage() {
                 >
                   クリア
                 </Button>
-                <Button
-                  variant="contained"
-                  color="primary"
-                  sx={{
-                    whiteSpace: "nowrap",
-                    boxShadow: "none",
-                    "&:hover": { boxShadow: "none" },
-                  }}
-                  onClick={handleSearch}
-                >
-                  検索
-                </Button>
+                <PrimaryButton onClick={handleSearch} label="検索" />
               </Box>
               {/* <FormActionButtons mb={1} /> */}
             </Box>

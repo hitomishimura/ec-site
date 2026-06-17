@@ -5,6 +5,7 @@ import Header from "@/components/admin/Header";
 import Sidebar from "@/components/admin/Sidebar";
 import Breadcrumb from "@/components/admin/Breadcrumb";
 import CustomDialog from "@/components/admin/CustomDialog";
+import PrimaryButton from "@/components/admin/PrimaryButton";
 import {
   Typography,
   Box,
@@ -137,7 +138,8 @@ export default function AdminProductsEdit({
           <Breadcrumb
             items={[
               { label: "トップページ", href: "/admin" },
-              { label: "商品新規登録" },
+              { label: product?.name ?? "" },
+              { label: "編集" },
             ]}
           />
 
@@ -355,18 +357,7 @@ export default function AdminProductsEdit({
             >
               クリア
             </Button>
-            <Button
-              variant="contained"
-              color="primary"
-              sx={{
-                whiteSpace: "nowrap",
-                boxShadow: "none",
-                "&:hover": { boxShadow: "none" },
-              }}
-              onClick={openDialog}
-            >
-              保存
-            </Button>
+            <PrimaryButton onClick={openDialog} />
           </Box>
           <CustomDialog
             isOpen={open}

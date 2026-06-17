@@ -5,6 +5,7 @@ import Header from "@/components/admin/Header";
 import Sidebar from "@/components/admin/Sidebar";
 import Breadcrumb from "@/components/admin/Breadcrumb";
 import CustomDialog from "@/components/admin/CustomDialog";
+import PrimaryButton from "@/components/admin/PrimaryButton";
 import {
   Typography,
   Box,
@@ -313,18 +314,7 @@ export default function AdminProductsCreate() {
             >
               クリア
             </Button>
-            <Button
-              variant="contained"
-              color="primary"
-              sx={{
-                whiteSpace: "nowrap",
-                boxShadow: "none",
-                "&:hover": { boxShadow: "none" },
-              }}
-              onClick={openDialog}
-            >
-              新規登録
-            </Button>
+            <PrimaryButton onClick={openDialog} label="新規登録" />
           </Box>
           <CustomDialog
             isOpen={open}
