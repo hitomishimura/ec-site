@@ -1,6 +1,6 @@
 "use client";
 
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import Header from "@/components/admin/Header";
 import Sidebar from "@/components/admin/Sidebar";
 import Breadcrumb from "@/components/admin/Breadcrumb";
@@ -18,19 +18,51 @@ import {
 import AttachFileIcon from "@mui/icons-material/AttachFile";
 import CloseIcon from "@mui/icons-material/Close";
 import { styled } from "@mui/material/styles";
+import { products, type Product } from "@/mocks/products";
 
-export default function AdminProductsCreate() {
+export default function AdminProductsEdit({
+  params,
+}: {
+  params: { product_id: string };
+}) {
+  const productId = Number(params.product_id);
+  const getProductById = (id: number): Product | undefined => {
+    return products.find((product) => product.id === Number(id));
+  };
+  const product = getProductById(productId);
+
   const Input = styled("input")({
     display: "none",
   });
 
-  const [productName, setProductName] = useState("");
-  const [price, setPrice] = useState("");
-  const [description, setDescription] = useState("");
+  const [form, setForm] = useState({
+    name: "",
+    price: "",
+    description: "",
+    image: "",
+  });
   const [selectedFile, setSelectedFile] = useState<File | null>(null);
   const [previewUrl, setPreviewUrl] = useState<string | null>(null);
+  const [displayName, setDisplayName] = useState<string>("");
   const [error, setError] = useState<string>("");
   const [open, setOpen] = useState(false); // 確認ダイアログ
+
+  useEffect(() => {
+    if (product) {
+      setForm({
+        name: product.name,
+        price: product.price.toString(),
+        description: product.description,
+        image: product.image,
+      });
+      if (product.image) {
+        setPreviewUrl(product.image);
+        setSelectedFile(null);
+        const fileName = product.image.split("/").pop() || "";
+        setDisplayName(fileName);
+      }
+    }
+  }, [product]);
 
   const handleFileSelect = (event: React.ChangeEvent<HTMLInputElement>) => {
     const file = event.target.files?.[0];
@@ -51,6 +83,7 @@ export default function AdminProductsCreate() {
       }
 
       setSelectedFile(file);
+      setDisplayName(file.name);
 
       // プレビューURLを作成
       const reader = new FileReader();
@@ -67,14 +100,17 @@ export default function AdminProductsCreate() {
     setError("");
   };
 
-  const handleRegister = () => {
-    console.log("click register");
+  const handleSave = () => {
+    console.log("click save");
     setOpen(false);
   };
   const handleClear = () => {
-    setProductName("");
-    setPrice("");
-    setDescription("");
+    setForm({
+      name: "",
+      price: "",
+      description: "",
+      image: "",
+    });
     handleSelectFileClear();
   };
 
@@ -102,7 +138,8 @@ export default function AdminProductsCreate() {
           <Breadcrumb
             items={[
               { label: "トップページ", href: "/admin" },
-              { label: "商品新規登録" },
+              { label: product?.name ?? "" },
+              { label: "編集" },
             ]}
           />
 
@@ -116,7 +153,7 @@ export default function AdminProductsCreate() {
               borderRadius: 0,
             }}
           >
-            <Typography>基本情報（新規登録）</Typography>
+            <Typography>基本情報（編集）</Typography>
           </Paper>
 
           <Box
@@ -143,12 +180,12 @@ export default function AdminProductsCreate() {
               <Grid size={{ xs: 10 }} sx={{ borderLeft: "1px solid #D9D9D9" }}>
                 <Box sx={{ p: 2 }}>
                   <TextField
-                    value={productName}
+                    value={form.name}
                     fullWidth
                     size="small"
                     placeholder="商品名を入力"
                     sx={{ width: "400px" }}
-                    onChange={(e) => setProductName(e.target.value)}
+                    onChange={(e) => setForm({ ...form, name: e.target.value })}
                   />
                 </Box>
               </Grid>
@@ -168,14 +205,15 @@ export default function AdminProductsCreate() {
               </Grid>
               <Grid size={{ xs: 10 }} sx={{ borderLeft: "1px solid #D9D9D9" }}>
                 <Box sx={{ p: 2 }}>
-                  {/* アップロードボタン */}
-                  {!selectedFile && (
+                  {/* previewUrlがない場合にアップロードボタンを表示 */}
+                  {!previewUrl && (
                     <label htmlFor="icon-button-file">
                       <Input
                         accept="image/png, image/jpeg, image/jpg"
                         id="icon-button-file"
                         type="file"
                         onChange={handleFileSelect}
+                        sx={{ display: "none" }}
                       />
                       <Button
                         variant="outlined"
@@ -200,45 +238,46 @@ export default function AdminProductsCreate() {
                           height: "auto",
                           border: "1px solid #D9D9D9",
                           mb: 1,
+                          display: "block",
                         }}
                       />
-                      {selectedFile && (
-                        <Paper
-                          elevation={0}
+                      {/* {selectedFile && ( */}
+                      <Paper
+                        elevation={0}
+                        sx={{
+                          display: "flex",
+                          alignItems: "center",
+                          gap: 1,
+                          backgroundColor: "#F6F6F6",
+                          border: "1px solid #D9D9D9",
+                          borderRadius: "0",
+                          p: "2px 10px",
+                          maxWidth: "300px",
+                        }}
+                      >
+                        <AttachFileIcon sx={{ color: "#666" }} />
+                        <Typography
+                          variant="body2"
                           sx={{
-                            display: "flex",
-                            alignItems: "center",
-                            gap: 1,
-                            backgroundColor: "#F6F6F6",
-                            border: "1px solid #D9D9D9",
-                            borderRadius: "0",
-                            p: "2px 10px",
-                            maxWidth: "300px",
+                            flexGrow: 1,
+                            color: "#333",
+                            overflow: "hidden",
+                            textOverflow: "ellipsis",
+                            whiteSpace: "nowrap",
+                            fontSize: "14px",
                           }}
                         >
-                          <AttachFileIcon sx={{ color: "#666" }} />
-                          <Typography
-                            variant="body2"
-                            sx={{
-                              flexGrow: 1,
-                              color: "#333",
-                              overflow: "hidden",
-                              textOverflow: "ellipsis",
-                              whiteSpace: "nowrap",
-                              fontSize: "14px",
-                            }}
-                          >
-                            {selectedFile.name}
-                          </Typography>
-                          <IconButton
-                            size="small"
-                            onClick={handleSelectFileClear}
-                            sx={{ color: "#999" }}
-                          >
-                            <CloseIcon fontSize="small" />
-                          </IconButton>
-                        </Paper>
-                      )}
+                          {displayName}
+                        </Typography>
+                        <IconButton
+                          size="small"
+                          onClick={handleSelectFileClear}
+                          sx={{ color: "#999" }}
+                        >
+                          <CloseIcon fontSize="small" />
+                        </IconButton>
+                      </Paper>
+                      {/* )} */}
                     </Box>
                   )}
                 </Box>
@@ -260,12 +299,14 @@ export default function AdminProductsCreate() {
               <Grid size={{ xs: 10 }} sx={{ borderLeft: "1px solid #D9D9D9" }}>
                 <Box sx={{ p: 2, display: "flex", alignItems: "center" }}>
                   <TextField
-                    value={price}
+                    value={form.price}
                     fullWidth
                     size="small"
                     placeholder="価格を入力"
                     sx={{ width: "400px", mr: 2 }}
-                    onChange={(e) => setPrice(e.target.value)}
+                    onChange={(e) =>
+                      setForm({ ...form, price: e.target.value })
+                    }
                   />
                   <Typography>円</Typography>
                 </Box>
@@ -286,12 +327,14 @@ export default function AdminProductsCreate() {
               <Grid size={{ xs: 10 }} sx={{ borderLeft: "1px solid #D9D9D9" }}>
                 <Box sx={{ p: 2 }}>
                   <TextField
-                    value={description}
+                    value={form.description}
                     multiline
                     rows={5}
                     fullWidth
                     placeholder="説明文を入力"
-                    onChange={(e) => setDescription(e.target.value)}
+                    onChange={(e) =>
+                      setForm({ ...form, description: e.target.value })
+                    }
                   />
                 </Box>
               </Grid>
@@ -314,12 +357,14 @@ export default function AdminProductsCreate() {
             >
               クリア
             </Button>
-            <PrimaryButton onClick={openDialog} label="新規登録" />
+            <PrimaryButton onClick={openDialog} />
           </Box>
           <CustomDialog
             isOpen={open}
+            title={"入力された編集内容で保存しますか？"}
+            btnName={"保存"}
             onClose={closeDialog}
-            onClick={handleRegister}
+            onClick={handleSave}
           />
         </Box>
       </Box>
