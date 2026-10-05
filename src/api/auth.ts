@@ -3,7 +3,9 @@ import { SigninRequest, SigninResponse } from "@/types/auth";
 export async function signin(
   payload: SigninRequest,
 ): Promise<SigninResponse | void> {
-  const csrfRes = await fetch(`http://localhost:8080/api/v1/admin/csrf`, {
+  const baseUrl = process.env.NEXT_PUBLIC_API_URL;
+
+  const csrfRes = await fetch(`${baseUrl}/admin/csrf`, {
     method: "GET",
     credentials: "include",
   });
