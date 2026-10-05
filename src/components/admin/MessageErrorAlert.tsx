@@ -3,7 +3,7 @@
 import { Typography, Alert } from "@mui/material";
 
 type MessageErrorAlertProps = {
-  messages: (string | undefined)[];
+  messages: string[];
   variant?: "filled" | "outlined" | "standard";
 };
 
@@ -11,8 +11,6 @@ export default function MessageErrorAlert({
   messages,
   variant = "standard",
 }: MessageErrorAlertProps) {
-  if (messages.length === 0) return null;
-
   return (
     <Alert
       severity="error"

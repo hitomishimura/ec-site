@@ -29,9 +29,9 @@ export default function AdminSignin() {
     formState: { isSubmitting, errors },
   } = form;
 
-  const formErrorMessages = Object.values(errors).map(
-    (error) => error?.message,
-  );
+  const formErrorMessages = Object.values(errors)
+    .map((error) => error?.message)
+    .filter((message): message is string => Boolean(message));
 
   const errorMessages = [
     ...formErrorMessages,
