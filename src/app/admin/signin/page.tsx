@@ -80,12 +80,14 @@ export default function AdminSignin() {
 
         <form onSubmit={handleSubmit(handleSubmitForm, handleInvalidSubmit)}>
           <InputField
+            id="email"
             label="メールアドレス"
             type="email"
             placeholder="email@example.net"
             {...register("email", { required: "メールアドレスが未入力です" })}
           />
           <InputField
+            id="password"
             label="パスワード"
             type="password"
             placeholder="Password"

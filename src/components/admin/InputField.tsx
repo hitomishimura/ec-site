@@ -1,21 +1,31 @@
 "use client";
 
 import React from "react";
-import { TextField, Box, Typography } from "@mui/material";
+import { TextField, Box } from "@mui/material";
 
 type InputFieldProps = {
   label: string;
   mt?: string | number;
   size?: "small" | "medium";
+  id?: string;
 } & Omit<React.ComponentProps<typeof TextField>, "label" | "size" | "mt">;
 
 const InputField = React.forwardRef<HTMLInputElement, InputFieldProps>(
-  function InputField({ label, mt = 0, size = "medium", ...props }, ref) {
+  function InputField({ label, mt = 0, size = "medium", id, ...props }, ref) {
     return (
       <Box sx={{ mt }}>
-        <Typography variant="subtitle2" sx={{ fontWeight: "bold" }}>
+        <Box
+          component="label"
+          htmlFor={id}
+          sx={{
+            display: "block",
+            fontSize: 14,
+            fontWeight: "bold",
+            mb: 1,
+          }}
+        >
           {label}
-        </Typography>
+        </Box>
         <TextField
           {...props}
           inputRef={ref}
