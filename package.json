@@ -18,7 +18,8 @@
     "next": "15.3.4",
     "react": "^19.1.0",
     "react-dom": "^19.1.0",
-    "react-hook-form": "^7.79.0"
+    "react-hook-form": "^7.79.0",
+    "zustand": "^5.0.15"
   },
   "devDependencies": {
     "@types/node": "^20",
