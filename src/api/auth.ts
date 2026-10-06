@@ -17,18 +17,15 @@ export async function signin(
   const csrfData = await csrfRes.json();
   const csrfToken = csrfData.token;
 
-  const response = await fetch(
-    "http://localhost:8080/api/v1/admin/auth/signin",
-    {
-      method: "POST",
-      credentials: "include",
-      headers: {
-        "Content-Type": "application/json",
-        "X-CSRF-TOKEN": csrfToken,
-      },
-      body: JSON.stringify(payload),
+  const response = await fetch(`${baseUrl}/admin/auth/signin`, {
+    method: "POST",
+    credentials: "include",
+    headers: {
+      "Content-Type": "application/json",
+      "X-CSRF-TOKEN": csrfToken,
     },
-  );
+    body: JSON.stringify(payload),
+  });
 
   if (response.status === 204) return;
 
