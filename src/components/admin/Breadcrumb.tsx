@@ -18,7 +18,7 @@ export default function Breadcrumb({ items }: Props) {
       sx={{
         display: "flex",
         flexDirection: "column",
-        width: "100vh",
+        width: "100%",
         mb: 2,
       }}
     >
@@ -36,7 +36,7 @@ export default function Breadcrumb({ items }: Props) {
             <Typography key={index} style={{ fontSize: "14px" }}>
               {item.label}
             </Typography>
-          )
+          ),
         )}
       </Breadcrumbs>
     </Box>

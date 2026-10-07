@@ -6,7 +6,7 @@ import { Button, Box, Typography } from "@mui/material";
 import { useRouter } from "next/navigation";
 import InputField from "@/components/admin/InputField";
 import MessageErrorAlert from "@/components/admin/MessageErrorAlert";
-import { signin } from "@/api/auth";
+import { signin } from "@/api/admin/auth";
 import type { SigninRequest } from "@/types/auth";
 
 export default function AdminSignin() {
