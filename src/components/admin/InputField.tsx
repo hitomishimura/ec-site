@@ -4,14 +4,17 @@ import React from "react";
 import { TextField, Box } from "@mui/material";
 
 type InputFieldProps = {
-  label: string;
+  label?: string;
   mt?: string | number;
   size?: "small" | "medium";
   id?: string;
 } & Omit<React.ComponentProps<typeof TextField>, "label" | "size" | "mt">;
 
 const InputField = React.forwardRef<HTMLInputElement, InputFieldProps>(
-  function InputField({ label, mt = 0, size = "medium", id, ...props }, ref) {
+  function InputField(
+    { label = "", mt = 0, size = "medium", id, ...props },
+    ref,
+  ) {
     return (
       <Box sx={{ mt }}>
         <Box
@@ -34,7 +37,7 @@ const InputField = React.forwardRef<HTMLInputElement, InputFieldProps>(
           size={size}
           sx={{
             backgroundColor: "white",
-            minWidth: 200,
+            minWidth: 100,
           }}
         />
       </Box>
